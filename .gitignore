@@ -20,6 +20,7 @@
 
 # project release file
 /*.war
+/*.exe
 
 # plugin release files
 /*.zip
