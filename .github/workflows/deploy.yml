@@ -49,7 +49,7 @@ jobs:
          aws-region: eu-north-1
      
      - name: Update kube config
-       run: aws eks update-kubeconfig --name trdl-synch-cluster --region eu-west-1
+       run: aws eks update-kubeconfig --name trdl-synch-cluster --region eu-north-1
 
      - name: Deploy image to Amazon EKS
        run: |
