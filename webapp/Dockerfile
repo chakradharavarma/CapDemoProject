@@ -12,16 +12,16 @@ RUN mkdir /app
 #Make the workdir
 WORKDIR /app
 # Copy the requirements file into the image
-COPY ./requirements.txt .
+COPY webapp/requirements.txt .
 # install the requirements.txt
 RUN pip install -r requirements.txt
 
 # copy the code to appropriate locations
-COPY trdl.py /app/trdl.py
-COPY startup.sh /app/startup.sh
-COPY uwsgi.ini /app/uwsgi.ini
+COPY webapp/trdl.py /app/trdl.py
+COPY webapp/startup.sh /app/startup.sh
+COPY webapp/uwsgi.ini /app/uwsgi.ini
 
-COPY nginx.conf /etc/nginx
+COPY webapp/nginx.conf /etc/nginx
 
 #Make the startup executable, expose port 80 and run startup file for nginx.
 RUN chmod +x ./startup.sh
