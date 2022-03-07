@@ -1,0 +1,55 @@
+name: CI
+on:
+  push:
+    branches: [master]
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+     - name: Checkout Repo
+       uses: actions/checkout@v3
+
+     - name: Build and push
+       uses: docker/build-push-action@v3
+       with:
+         push: true
+         tags: chakri276/interview_projects_2022:synch_webapp
+
+     - name: Terraform Init
+       uses: hashicorp/terraform-github-actions/init@v0.4.0
+       env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         TF_ACTION_WORKING_DIR: 'webapp'
+         AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
+         AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      
+     - name: Terraform Validate
+       uses: hashicorp/terraform-github-actions/validate@v0.3.7
+
+     - name: Terraform Apply
+       uses: hashicorp/terraform-github-actions/apply@v0.4.0
+       env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         TF_ACTION_WORKING_DIR: 'webapp'
+         AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
+         AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+     - name: Install kubectl
+       uses: azure/setup-kubectl@v1
+       with:
+         version: 'v1.21.3'
+       id: install
+
+     - name: Configure AWS credentials
+       uses: aws-actions/configure-aws-credentials@v1
+       with:
+         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+         aws-region: eu-north-1
+     
+     - name: Update kube config
+       run: aws eks update-kubeconfig --name trdl-synch-cluster --region eu-west-1
+
+     - name: Deploy image to Amazon EKS
+       run: |
+         kubectl apply -f deployment.yaml
