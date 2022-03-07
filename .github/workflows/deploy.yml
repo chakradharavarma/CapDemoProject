@@ -59,7 +59,7 @@ jobs:
      - name: Build and push
        uses: docker/build-push-action@v2
        with:
-         file: Dockerfile
+         file: webapp/Dockerfile
          push: true
          tags: chakri276/interview_projects_2022:synch_webapp
 
