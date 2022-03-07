@@ -20,7 +20,7 @@
 
 # project release file
 /*.war
-/*.exe
+webapp/.terraform/providers/registry.terraform.io/hashicorp/aws/4.4.0/windows_amd64/terraform-provider-aws_v4.4.0_x5.exe
 
 # plugin release files
 /*.zip
