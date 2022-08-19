@@ -4,7 +4,7 @@ FROM python:latest
 RUN apt-get -y update
 
 RUN apt-get -y install nginx
-RUN apt-get -y install python3-dev
+RUN apt-get -y install python3.5-dev
 RUN apt-get -y install build-essential
 
 #Create a new directory app
