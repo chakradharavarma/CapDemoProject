@@ -23,7 +23,7 @@ spec:
    selector:
       matchLabels:
         app: synch-trdl-app
-   replicas: 1
+   replicas: 2 
    template:
       metadata:
          labels:
