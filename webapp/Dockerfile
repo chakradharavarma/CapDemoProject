@@ -1,12 +1,12 @@
 #Start by pulling the python image
-FROM python:latest
+FROM python:3.6-slim
 
 RUN apt-get -y update
 
 RUN apt-get -y install nginx
 
-RUN sudo add-apt-repository ppa:deadsnakes/ppa
-RUN apt-get -y install python3.5-dev
+
+RUN apt-get -y install python3-dev
 RUN apt-get -y install build-essential
 
 #Create a new directory app
