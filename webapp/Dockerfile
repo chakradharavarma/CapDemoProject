@@ -1,6 +1,7 @@
 #Start by pulling the python image
 FROM python:latest
 
+RUN add-apt-repository ppa:deadsnakes/ppa
 RUN apt-get -y update
 
 RUN apt-get -y install nginx
