@@ -14,6 +14,7 @@ WORKDIR /app
 # Copy the requirements file into the image
 COPY webapp/requirements.txt .
 # install the requirements.txt
+RUN ls -ll
 RUN pip install -r requirements.txt
 
 # copy the code to appropriate locations
